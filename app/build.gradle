@@ -17,8 +17,27 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
+    sourceSets {
+        main {
+
+            res.srcDirs =
+                    [
+                            'src/main/res/layout/authorization_and_registration',
+                            'src/main/res/layout/authorization_and_registration/authorization',
+                            'src/main/res/layout/authorization_and_registration/registration',
+                            'src/main/res/layout/authorization_and_registration/authorization/layout',
+                            'src/main/res/layout/authorization_and_registration/registration/layout',
+                            'src/main/res/layout',
+                            'src/main/res'
+                    ]
+        }
+    }
 }
 
+repositories {
+    mavenCentral()
+}
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
@@ -26,6 +45,8 @@ dependencies {
     })
     compile 'com.android.support:appcompat-v7:26.+'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.facebook.android:facebook-android-sdk:4.6.0'
+    compile 'com.google.firebase:firebase-auth:11.6.0'
     testCompile 'junit:junit:4.12'
 }
 
