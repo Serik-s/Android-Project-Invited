@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.View;
 
 import com.example.serik.invited_app.R;
+import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -29,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void signOut() {
         mAuth.signOut();
+        LoginManager.getInstance().logOut();
         updateUI(null);
     }
 

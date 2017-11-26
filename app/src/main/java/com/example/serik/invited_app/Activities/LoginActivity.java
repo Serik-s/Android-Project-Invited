@@ -74,7 +74,10 @@ public class LoginActivity extends AppCompatActivity {
     // [FIREBASE EMAIL AND PASSWORD AUTHORIZATION]
 
     public void emailAuthorization(View v) {
-
+        String email = mEmailField.getText().toString();
+        String password = mPasswordField.getText().toString();
+        Log.e(emailTAG, "this is email: " + email + " and password: " + password);
+        signIn(email, password);
     }
 
     private void signIn(final String email, String password) {
@@ -83,13 +86,8 @@ public class LoginActivity extends AppCompatActivity {
             return;
         }
 
-        
 
-        progressBar = new ProgressBar(LoginActivity.this,null,android.R.attr.progressBarStyleLarge);
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(100,100);
-        params.addRule(RelativeLayout.CENTER_IN_PARENT);
-//        layout.addView(progressBar);
-        progressBar.setVisibility(View.VISIBLE);  //To show ProgressBar
+//        progressBar.setVisibility(View.VISIBLE);  //To show ProgressBar
         // [START sign_in_with_email]
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -113,7 +111,7 @@ public class LoginActivity extends AppCompatActivity {
 //                            mStatusTextView.setText(R.string.auth_failed);
                             Log.d(emailTAG, "authorized successfully");
                         }
-                        progressBar.setVisibility(View.GONE);
+//                        progressBar.setVisibility(View.GONE);
                         // [END_EXCLUDE]
                     }
                 });
@@ -294,7 +292,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void updateUI(FirebaseUser user) {
         Log.e(facebookTAG, "firebase user " + user);
-//        hideProgressDialog();
+//        progressBar.setVisibility(View.GONE);
         if (user != null) {
             Intent intent = new Intent(LoginActivity.this,MainActivity.class);
             startActivity(intent);

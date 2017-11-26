@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<tabs>
+    <tab
+        id="@+id/tab_events"
+        icon="@drawable/ic_event"
+        title="Events"
+        inActiveColor="@color/inActive"
+        activeColor="@color/Active"
+        barColorWhenSelected="@color/tabColor"
+        badgeBackgroundColor="@color/colorWhite"
+        badgeHidesWhenActive="true"/>
+    <tab
+        id="@+id/tab_search"
+        icon="@drawable/ic_search"
+        title="Search"
+        inActiveColor="@color/inActive"
+        activeColor="@color/Active"
+        barColorWhenSelected="@color/tabColor"
+        badgeBackgroundColor="@color/colorWhite"
+        badgeHidesWhenActive="true"/>
+    <tab
+        id="@+id/tab_profile"
+        icon="@drawable/ic_profile"
+        title="Profile"
+        inActiveColor="@color/inActive"
+        activeColor="@color/Active"
+        barColorWhenSelected="@color/tabColor"
+        badgeBackgroundColor="@color/colorWhite"
+        badgeHidesWhenActive="true"
+        />
+</tabs>

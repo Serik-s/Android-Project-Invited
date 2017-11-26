@@ -7,4 +7,8 @@
     <color name="facebookColor">#3b5998</color>
     <color name="signInColor">#219653</color>
     <color name="colorGrey">#C4C4C4</color>
+    <color name="inActive">#BDBDBD</color>
+    <color name="Active">#FFFFFF</color>
+    <color name="tabColor">#005696</color>
+    <color name="colorBlack">#000000</color>
 </resources>
