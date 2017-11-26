@@ -1,6 +1,7 @@
 package com.example.serik.invited_app.Activities;
 
 import android.content.Intent;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -41,6 +42,7 @@ public class LoginActivity extends AppCompatActivity {
 
     CallbackManager callbackManager;
     private FirebaseAuth mAuth;
+    private static final String TAG = "FacebookLogin";
 
 
     @Override
@@ -54,7 +56,6 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     public void facebookLogin(View v) {
-        LinearLayout facebookLoginButton = (LinearLayout) v;
         LoginButton loginButton = (LoginButton) findViewById(R.id.login_button);
         loginButton.setReadPermissions("email", "public_profile");
         getLoginDetails(loginButton);
@@ -67,27 +68,30 @@ public class LoginActivity extends AppCompatActivity {
         login_button.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult login_result) {
-//                handleFacebookAccessToken(login_result.getAccessToken());
+                Log.e(TAG, "just current access token" + AccessToken.getCurrentAccessToken());
+                Log.e(TAG, "current + acces token" + AccessToken.getCurrentAccessToken().getToken());
+                Log.e(TAG, "current + acces token" + login_result.getAccessToken());
+                handleFacebookAccessToken(AccessToken.getCurrentAccessToken().getToken());
 
-                GraphRequestAsyncTask graphRequestAsyncTask = new GraphRequest(
-                        login_result.getAccessToken(),
-                        //AccessToken.getCurrentAccessToken(),
-                        "/me/friends",
-                        null,
-                        HttpMethod.GET,
-                        new GraphRequest.Callback() {
-                            public void onCompleted(GraphResponse response) {
-                                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
-                                try {
-                                    JSONArray rawName = response.getJSONObject().getJSONArray("data");
-                                    intent.putExtra("jsondata", rawName.toString());
-                                    startActivity(intent);
-                                } catch (JSONException e) {
-                                    e.printStackTrace();
-                                }
-                            }
-                        }
-                ).executeAsync();
+//                GraphRequestAsyncTask graphRequestAsyncTask = new GraphRequest(
+//                        login_result.getAccessToken(),
+//                        //AccessToken.getCurrentAccessToken(),
+//                        "/me/friends",
+//                        null,
+//                        HttpMethod.GET,
+//                        new GraphRequest.Callback() {
+//                            public void onCompleted(GraphResponse response) {
+//                                Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+//                                try {
+//                                    JSONArray rawName = response.getJSONObject().getJSONArray("data");
+//                                    intent.putExtra("jsondata", rawName.toString());
+//                                    startActivity(intent);
+//                                } catch (JSONException e) {
+//                                    e.printStackTrace();
+//                                }
+//                            }
+//                        }
+//                ).executeAsync();
 
             }
 
@@ -135,31 +139,42 @@ public class LoginActivity extends AppCompatActivity {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
+        updateUI(currentUser);
     }
 
-    private void handleFacebookAccessToken(AccessToken token) {
-//        Log.d(TAG, "handleFacebookAccessToken:" + token);
+    private void handleFacebookAccessToken(String token) {
+        Log.d(TAG, "handleFacebookAccessToken:" + token);
 
-        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+        AuthCredential credential = FacebookAuthProvider.getCredential(token);
+        Log.e(TAG, "credential " + credential);
         mAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-//                            Log.d(TAG, "signInWithCredential:success");
+                            Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
-//                            updateUI(user);
+                            updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
-//                            Log.w(TAG, "signInWithCredential:failure", task.getException());
+                            Log.w(TAG, "signInWithCredential:failure", task.getException());
                             Toast.makeText(LoginActivity.this, "Authentication failed.",
                                     Toast.LENGTH_SHORT).show();
-//                            updateUI(null);
+                            updateUI(null);
                         }
 
                         // ...
                     }
                 });
+    }
+
+    private void updateUI(FirebaseUser user) {
+        Log.e(TAG, "firebase user " + user);
+//        hideProgressDialog();
+        if (user != null) {
+            Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+            startActivity(intent);
+        }
     }
 }
