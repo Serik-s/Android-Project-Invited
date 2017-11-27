@@ -22,12 +22,12 @@ public class EventDetails extends AppCompatActivity {
         setContentView(R.layout.event_details);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+//        setSupportActionBar(toolbar);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        Event article = getIntent().getParcelableExtra("article");
+        Event article = getIntent().getParcelableExtra("event");
 
         TextView title = (TextView) findViewById(R.id.articleTitle);
         TextView text = (TextView) findViewById(R.id.articleText);

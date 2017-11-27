@@ -3,6 +3,7 @@ package com.example.serik.invited_app.Adapters;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.util.Log;
 
 import com.example.serik.invited_app.Fragments.EventsFragment;
 import com.example.serik.invited_app.Fragments.ProfileFragment;
@@ -15,6 +16,7 @@ import com.example.serik.invited_app.Fragments.SearchFragment;
 public class MainAdapter extends FragmentPagerAdapter {
 
     private static int NUM_ITEMS = 3;
+    private static String mainAdapterTAG = "MAIN ADAPTER";
 
     public MainAdapter(FragmentManager fragmentManager) {
         super(fragmentManager);
@@ -29,6 +31,7 @@ public class MainAdapter extends FragmentPagerAdapter {
     // Returns the fragment to display for that page
     @Override
     public Fragment getItem(int position) {
+        Log.e(mainAdapterTAG, "We are on method getItem and its position is " + position);
         switch (position) {
             case 0: // Fragment # 0 - This will show FirstFragment
                 return EventsFragment.newInstance();
@@ -37,7 +40,7 @@ public class MainAdapter extends FragmentPagerAdapter {
             case 2:
                 return ProfileFragment.newInstance();
             default:
-                return null;
+                return EventsFragment.newInstance();
         }
     }
 

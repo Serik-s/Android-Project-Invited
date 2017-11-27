@@ -4,21 +4,38 @@
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <!--<android.support.design.widget.AppBarLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:theme="@style/AppTheme.AppBarOverlay">-->
+
+        <!--<android.support.v7.widget.Toolbar-->
+            <!--android:id="@+id/toolbar"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="?attr/actionBarSize"-->
+            <!--android:background="?attr/colorPrimary"-->
+            <!--app:popupTheme="@style/MyCustomToolBar"-->
+            <!--app:theme="@style/MyCustomToolBar"-->
+            <!--/>-->
+
+    <!--</android.support.design.widget.AppBarLayout>-->
 
 
-    <Button
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="log out"
-        android:textColor="@color/colorPrimary"
-        android:onClick="logOut"/>
+
+    <!--<Button-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="log out"-->
+        <!--android:textColor="@color/colorPrimary"-->
+        <!--android:onClick="logOut"/>-->
+
 
     <android.support.v4.view.ViewPager
         android:id="@+id/viewpager"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        />
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="60dp"
+        android:background="@color/eventsBackgroundColor" />
 
     <com.roughike.bottombar.BottomBar
         android:id="@+id/bottomBar"

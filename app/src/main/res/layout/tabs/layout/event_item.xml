@@ -54,6 +54,7 @@
                 android:orientation="horizontal"
                 android:layout_marginRight="7dp">
                 <TextView
+                    android:id="@+id/event_date"
                     android:layout_marginTop="15dp"
                     android:layout_marginLeft="7dp"
                     android:layout_width="wrap_content"

@@ -16,7 +16,10 @@ public class Event implements Parcelable {
     private String imageURL;
 
     public Event() {
-
+        eventID = 1;
+        eventTitle = "On thrusday we are going to pass android for 100%";
+        eventDescription = "It will be very easy and exciting. I'm going to pass in my university at 16:00";
+        eventDate = "30th of Novermber";
     }
 
     protected Event(Parcel in) {
@@ -26,6 +29,19 @@ public class Event implements Parcelable {
         eventDescription = in.readString();
         imageURL = in.readString();
     }
+
+
+    public static final Creator<Event> CREATOR = new Creator<Event>() {
+        @Override
+        public Event createFromParcel(Parcel in) {
+            return new Event(in);
+        }
+
+        @Override
+        public Event[] newArray(int size) {
+            return new Event[size];
+        }
+    };
 
 
     // GET METHODS FOR EVENT
