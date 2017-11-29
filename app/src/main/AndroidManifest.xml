@@ -38,6 +38,9 @@
 
         <activity android:name=".Activities.EditUserNameActivity">
         </activity>
+
+        <activity android:name=".Activities.FeedbackActivity">
+        </activity>
     </application>
 
 </manifest>

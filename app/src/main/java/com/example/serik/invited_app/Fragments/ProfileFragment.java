@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.serik.invited_app.Activities.EditUserNameActivity;
+import com.example.serik.invited_app.Activities.FeedbackActivity;
 import com.example.serik.invited_app.Activities.LoginActivity;
 import com.example.serik.invited_app.Activities.MainActivity;
 import com.example.serik.invited_app.Adapters.EventsAdapter;
@@ -62,6 +63,8 @@ public class ProfileFragment extends Fragment {
         TextView userEmail = (TextView) view.findViewById(R.id.user_email);
         LinearLayout logOutButton = (LinearLayout) view.findViewById(R.id.logout);
         LinearLayout editName = (LinearLayout) view.findViewById(R.id.edit_name);
+        LinearLayout feedback = (LinearLayout) view.findViewById(R.id.feedback_activity);
+
 
         logOutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,11 +72,16 @@ public class ProfileFragment extends Fragment {
                 outFragment();
             }
         });
-
         editName.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 moveToEditActivity();
+            }
+        });
+        feedback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                moveToFeedbackActivity();
             }
         });
 
@@ -93,6 +101,11 @@ public class ProfileFragment extends Fragment {
 
     public void moveToEditActivity() {
         Intent intent = new Intent(this.getActivity(), EditUserNameActivity.class);
+        startActivity(intent);
+    }
+
+    public void moveToFeedbackActivity() {
+        Intent intent = new Intent(this.getActivity(), FeedbackActivity.class);
         startActivity(intent);
     }
 

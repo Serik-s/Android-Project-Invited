@@ -3,6 +3,91 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="12dp">
+
+        <EditText
+            android:id="@+id/feedback_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="7dp"
+            android:hint="Write you feedback here..."
+            />
+
+       <TextView
+           android:layout_marginTop="12dp"
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:text="Rate our application:"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:layout_marginTop="12dp">
+            <Button
+                android:id="@+id/star_one"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/unselected_star"
+                android:layout_marginRight="10dp"
+                >
+
+            </Button>
+            <Button
+                android:id="@+id/star_two"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/unselected_star"
+                android:layout_marginRight="10dp"
+                >
+
+            </Button>
+            <Button
+                android:id="@+id/star_three"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/unselected_star"
+                android:layout_marginRight="10dp"
+                >
+
+            </Button>
+            <Button
+                android:id="@+id/star_four"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/unselected_star"
+                android:layout_marginRight="10dp"
+                >
+
+            </Button>
+            <Button
+                android:id="@+id/star_five"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/unselected_star"
+                >
+
+            </Button>
+        </LinearLayout>
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop="12dp"
+            android:text="Send"
+            android:background="@drawable/go_button"
+            android:textColor="@color/colorWhite"
+            android:onClick="sendFeedback"/>
+    </LinearLayout>
+
 
 
 
