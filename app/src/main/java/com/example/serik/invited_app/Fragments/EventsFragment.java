@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
@@ -50,9 +51,11 @@ public class EventsFragment extends Fragment {
 //    @Inject
     Context mContext;
 
-    @BindView(R.id.recycler)
-    RecyclerView mRecyclerView;
+    RecyclerView recyclerView;
+    FrameLayout progressBar;
     EventsAdapter eventsAdapter;
+    View view;
+
     List<Event> eventList = new ArrayList<>();
     private static String fragmentTAG = "EVENTS FRAGMENT";
     private static String databaseTAG = "FIREBASE DATABASE";
@@ -86,7 +89,10 @@ public class EventsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.events_activity, container, false);
+          view = inflater.inflate(R.layout.events_activity, container, false);
+        progressBar = (FrameLayout) view.findViewById(R.id.progress);
+        recyclerView = (RecyclerView) view.findViewById(R.id.recycler);
+
 //        TextView tvLabel = (TextView) view.findViewById(R.id.);
 //        tvLabel.setText(page + " -- " + title);
 //        Log.e(fragmentTAG, "We are on EVENTS FRAGMENT");
@@ -97,12 +103,12 @@ public class EventsFragment extends Fragment {
         Log.e(fragmentTAG, "this is list of events " + eventList);
 
 
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler);
-        eventsAdapter = new EventsAdapter(getActivity(), eventList);
-        LinearLayoutManager llm = new LinearLayoutManager(this.getContext());
-        llm.setOrientation(LinearLayoutManager.VERTICAL);
-        recyclerView.setLayoutManager(llm);
-        recyclerView.setAdapter(eventsAdapter);
+//        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler);
+//        eventsAdapter = new EventsAdapter(getActivity(), eventList);
+//        LinearLayoutManager llm = new LinearLayoutManager(this.getContext());
+//        llm.setOrientation(LinearLayoutManager.VERTICAL);
+//        recyclerView.setLayoutManager(llm);
+//        recyclerView.setAdapter(eventsAdapter);
 
 //            new DatabaseAsync().execute();
         return view;
@@ -129,6 +135,15 @@ public class EventsFragment extends Fragment {
                     eventList.add(event);
                 }
                 Log.e(fragmentTAG, "this is updated list of events " + eventList);
+
+                eventsAdapter = new EventsAdapter(getActivity(), eventList);
+                LinearLayoutManager llm = new LinearLayoutManager(getActivity());
+                llm.setOrientation(LinearLayoutManager.VERTICAL);
+                recyclerView.setLayoutManager(llm);
+                recyclerView.setAdapter(eventsAdapter);
+                progressBar.setVisibility(View.GONE);
+                recyclerView.setVisibility(View.VISIBLE);
+
 
             }
 

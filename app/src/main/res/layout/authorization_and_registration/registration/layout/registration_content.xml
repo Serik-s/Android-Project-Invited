@@ -51,7 +51,7 @@
                 android:src="@drawable/user_logo" />
 
             <EditText
-                android:id="@+id/userName"
+                android:id="@+id/user_name_registration"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:background="@drawable/right_side_edit_text"

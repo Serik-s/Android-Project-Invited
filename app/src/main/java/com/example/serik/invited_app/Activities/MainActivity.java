@@ -65,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        mViewPager.setOffscreenPageLimit(3);
+
         mBottomBar = (BottomBar) findViewById(R.id.bottomBar);
         mBottomBar.setOnTabSelectListener(new OnTabSelectListener() {
             @Override
@@ -87,8 +89,6 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-
-    // FIREBASE LOGOUT
     public void logOut(View v) {
         mAuth.signOut();
         LoginManager.getInstance().logOut();
@@ -99,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
         if (user == null) {
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
+            finish();
         }
     }
 }

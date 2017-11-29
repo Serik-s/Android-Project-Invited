@@ -13,6 +13,7 @@ import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
+import com.example.serik.invited_app.Models.User;
 import com.example.serik.invited_app.R;
 import com.facebook.CallbackManager;
 import com.facebook.login.widget.LoginButton;
@@ -32,6 +33,7 @@ public class RegistrationActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText mEmailField;
     private EditText mPasswordField;
+    private EditText mUserNameField;
     private ProgressBar progressBar;
 
     private static final String facebookTAG = "Facebook Login";
@@ -46,6 +48,7 @@ public class RegistrationActivity extends AppCompatActivity {
         // Edit Texts
         mEmailField = findViewById(R.id.mail_field);
         mPasswordField = findViewById(R.id.password_field);
+        mUserNameField = findViewById(R.id.user_name_registration);
 
         mAuth = FirebaseAuth.getInstance();
     }
@@ -64,10 +67,11 @@ public class RegistrationActivity extends AppCompatActivity {
         Button loginButton = (Button) findViewById(R.id.sign_up_button);
         String email = mEmailField.getText().toString();
         String password = mPasswordField.getText().toString();
-        Log.d(emailTAG, "these are mail and password " + email + " and " + password);
-        createAccount(email, password);
+        String username= mUserNameField.getText().toString();
+        Log.d(emailTAG, "these are mail " + email + " password " + password + " and username" + username);
+        createAccount(email, password, username);
     }
-    private void createAccount(String email, String password) {
+    private void createAccount(String email, String password, final String username) {
 
         Log.e(emailTAG, "createAccount:" + email);
         if (!validateForm()) {
@@ -88,6 +92,7 @@ public class RegistrationActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(emailTAG, "createUserWithEmail:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+
                             updateUI(user);
                         } else {
                             // If sign in fails, display a message to the user.
@@ -102,6 +107,8 @@ public class RegistrationActivity extends AppCompatActivity {
                         // [END_EXCLUDE]
                     }
                 });
+
+
         // [END create_user_with_email]
     }
 
@@ -125,6 +132,14 @@ public class RegistrationActivity extends AppCompatActivity {
             mPasswordField.setError(null);
         }
 
+        String username = mUserNameField.getText().toString();
+        if (TextUtils.isEmpty(password)) {
+            mUserNameField.setError("Required.");
+            valid = false;
+        } else {
+            mUserNameField.setError(null);
+        }
+
         return valid;
     }
 
@@ -133,6 +148,7 @@ public class RegistrationActivity extends AppCompatActivity {
         Log.e(facebookTAG, "firebase user " + user);
 //        hideProgressDialog();
         if (user != null) {
+            Log.d(emailTAG, mAuth.getCurrentUser().getEmail());
             Intent intent = new Intent(RegistrationActivity.this,MainActivity.class);
             startActivity(intent);
         }

@@ -13,6 +13,8 @@ import com.example.serik.invited_app.Activities.EventDetails;
 import com.example.serik.invited_app.Models.Event;
 import com.example.serik.invited_app.R;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 /**
@@ -53,7 +55,7 @@ public class EventsAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder
         viewHolder.setPosition(position);
         viewHolder.eventTitle.setText(event.getEventTitle());
         viewHolder.eventDate.setText(event.getDate());
-
+        viewHolder.eventPopulation.setText("Number of people coming: " + event.getEventPopulation());
     }
 
     @Override
@@ -66,12 +68,14 @@ public class EventsAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         TextView eventTitle;
         TextView eventDate;
+        TextView eventPopulation;
         int position;
 
         public MyViewHolder(View itemView) {
             super(itemView);
             eventTitle = (TextView) itemView.findViewById(R.id.event_title);
             eventDate = (TextView) itemView.findViewById(R.id.event_date);
+            eventPopulation = (TextView) itemView.findViewById(R.id.event_population);
 
             itemView.setOnClickListener(this);
         }

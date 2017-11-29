@@ -37,6 +37,7 @@
 
             <TextView
                 android:layout_marginTop="10dp"
+                android:layout_marginBottom="5dp"
                 android:layout_marginLeft="7dp"
                 android:id="@+id/event_title"
                 android:gravity="center_vertical"
@@ -47,33 +48,45 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 />
+            <TextView
+                android:id="@+id/event_date"
+                android:layout_marginTop="10dp"
+                android:layout_marginLeft="7dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="13th of January"
+                android:textSize="13sp">
+            </TextView>
 
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginRight="7dp">
+                android:layout_marginRight="7dp"
+                android:layout_marginTop="10dp">
+
                 <TextView
-                    android:id="@+id/event_date"
-                    android:layout_marginTop="15dp"
+                    android:id="@+id/event_population"
+                    android:layout_marginTop="10dp"
                     android:layout_marginLeft="7dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="13th of January"
+                    android:text="Number of people coming: "
                     android:textSize="13sp">
                 </TextView>
 
                 <Button
-                    android:layout_marginBottom="5dp"
                     android:layout_width="60dp"
                     android:layout_height="30dp"
-                    android:layout_alignParentRight="true"
                     android:text="I will go"
+                    android:layout_marginBottom="5dp"
                     android:textSize="13sp"
                     android:textColor="@color/colorWhite"
                     android:background="@drawable/go_button"
                     android:textAllCaps="false"
-                    android:layout_marginRight="2dp">
+                    android:layout_marginRight="2dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_alignParentEnd="true">
 
                 </Button>
             </RelativeLayout>

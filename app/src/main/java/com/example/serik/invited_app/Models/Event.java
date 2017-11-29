@@ -30,7 +30,7 @@ public class Event implements Parcelable {
         eventDate = "30th of Novermber";
     }
 
-    public Event(String eventTitle, String eventDescription, String eventDate, long  eventPopulation){
+    public Event(String eventTitle, String eventDate, String eventDescription, long  eventPopulation){
         this.eventTitle = eventTitle;
         this.eventDescription = eventDescription;
         this.eventDate = eventDate;
@@ -73,12 +73,16 @@ public class Event implements Parcelable {
 
     public int getEventID() { return  eventID; }
 
+    public long getEventPopulation() { return eventPopulation; }
+
     // SET METHODS FOR EVENT
     public void setEventDate(String eventDate) { this.eventDate =  eventDate; }
 
     public void setEventTitle(String eventTitle) { this.eventTitle =  eventTitle; }
 
     public void setEventDescription(String eventDescription) { this.eventDescription =  eventDescription; }
+
+    public void setEventPopulation(long eventPopulation) { this.eventPopulation = eventPopulation; }
 
     @Override
     public int describeContents() {
