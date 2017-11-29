@@ -1,8 +1,11 @@
 package com.example.serik.invited_app.Activities;
 
+import android.content.DialogInterface;
 import android.icu.text.DateFormat;
 import android.icu.util.Calendar;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
@@ -166,7 +169,21 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
         String email = mAuth.getCurrentUser().getEmail();
         feedbackRef.updateChildren(Feedback.toMap(username, email, feedbackText, dateString, rating));
 
-        finish();
+        AlertDialog.Builder builder;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            builder = new AlertDialog.Builder(FeedbackActivity.this, android.R.style.Theme_Material_Dialog_Alert);
+        } else {
+            builder = new AlertDialog.Builder(FeedbackActivity.this);
+        }
+        builder.setTitle("Done!")
+                .setMessage("Thanks for your reply :)")
+                .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        Log.e("YES", "Positive button finish");
+                        finish();
+                    }
+                })
+                .show();
     }
 
     private boolean validateForm() {
