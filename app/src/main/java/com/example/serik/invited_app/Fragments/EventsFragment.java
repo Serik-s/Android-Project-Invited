@@ -56,7 +56,7 @@ public class EventsFragment extends Fragment {
     EventsAdapter eventsAdapter;
     View view;
 
-    List<Event> eventList = new ArrayList<>();
+    public static List<Event> eventList = new ArrayList<>();
     private static String fragmentTAG = "EVENTS FRAGMENT";
     private static String databaseTAG = "FIREBASE DATABASE";
 
@@ -89,17 +89,9 @@ public class EventsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-          view = inflater.inflate(R.layout.events_activity, container, false);
+        view = inflater.inflate(R.layout.events_activity, container, false);
         progressBar = (FrameLayout) view.findViewById(R.id.progress);
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler);
-
-//        TextView tvLabel = (TextView) view.findViewById(R.id.);
-//        tvLabel.setText(page + " -- " + title);
-//        Log.e(fragmentTAG, "We are on EVENTS FRAGMENT");
-//        for (int i = 0; i < 10; i++){
-//            Event testEvent = new Event();
-//            eventList.add(testEvent);
-//        }
         Log.e(fragmentTAG, "this is list of events " + eventList);
 
 
@@ -110,7 +102,6 @@ public class EventsFragment extends Fragment {
 //        recyclerView.setLayoutManager(llm);
 //        recyclerView.setAdapter(eventsAdapter);
 
-//            new DatabaseAsync().execute();
         return view;
     }
 
