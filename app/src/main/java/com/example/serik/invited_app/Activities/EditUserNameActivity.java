@@ -45,6 +45,9 @@ public class EditUserNameActivity extends AppCompatActivity {
         User.changeUserName(mAuth.getCurrentUser(), nameToChange);
         Log.e("CHANGED NAME IS ", mAuth.getCurrentUser().getDisplayName());
 
+        Intent intent = new Intent();
+        intent.putExtra("name", nameToChange);
+        setResult(RESULT_OK, intent);
 
         finish();
     }

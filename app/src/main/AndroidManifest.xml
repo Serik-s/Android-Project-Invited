@@ -41,6 +41,10 @@
 
         <activity android:name=".Activities.FeedbackActivity">
         </activity>
+
+        <activity android:name=".Activities.VisitedEventsActivity">
+        </activity>
+
     </application>
 
 </manifest>

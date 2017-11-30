@@ -11,7 +11,9 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.TextView;
 
@@ -19,6 +21,7 @@ import com.example.serik.invited_app.Activities.LoginActivity;
 import com.example.serik.invited_app.Adapters.EventsAdapter;
 import com.example.serik.invited_app.Models.Event;
 import com.example.serik.invited_app.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -55,6 +58,8 @@ public class EventsFragment extends Fragment {
     FrameLayout progressBar;
     EventsAdapter eventsAdapter;
     View view;
+    private FirebaseAuth mAuth;
+
 
     public static List<Event> eventList = new ArrayList<>();
     private static String fragmentTAG = "EVENTS FRAGMENT";
@@ -93,6 +98,16 @@ public class EventsFragment extends Fragment {
         progressBar = (FrameLayout) view.findViewById(R.id.progress);
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler);
         Log.e(fragmentTAG, "this is list of events " + eventList);
+
+        Button iGo = (Button) view.findViewById(R.id.i_will_go_button);
+
+
+//        iGo.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                iWillGoToEvent();
+//            }
+//        });
 
 
 //        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler);
@@ -145,6 +160,14 @@ public class EventsFragment extends Fragment {
             }
         });
     }
+
+//    private void iWillGoToEvent() {
+//        FirebaseDatabase database = FirebaseDatabase.getInstance();
+//        DatabaseReference users = database.getReference("Users");
+////        DatabaseReference user = users.child(mAuth.getCurrentUser().)
+//
+//
+//    }
 
 //
 //    @Override

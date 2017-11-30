@@ -18,12 +18,14 @@ import com.example.serik.invited_app.Activities.EditUserNameActivity;
 import com.example.serik.invited_app.Activities.FeedbackActivity;
 import com.example.serik.invited_app.Activities.LoginActivity;
 import com.example.serik.invited_app.Activities.MainActivity;
+import com.example.serik.invited_app.Activities.VisitedEventsActivity;
 import com.example.serik.invited_app.Adapters.EventsAdapter;
 import com.example.serik.invited_app.Models.Event;
 import com.example.serik.invited_app.R;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
@@ -42,6 +44,9 @@ public class ProfileFragment extends Fragment {
 
     EventsAdapter eventsAdapter;
     List<Event> eventList = new ArrayList<>();
+
+    View view;
+    TextView userFullName;
 //        AppDatabase database;
 
     // newInstance constructor for creating fragment with arguments
@@ -57,13 +62,19 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
 
         mAuth = FirebaseAuth.getInstance();
-        View view = inflater.inflate(R.layout.profile_activity, container, false);
+        view = inflater.inflate(R.layout.profile_activity, container, false);
 
-        TextView userFullName = (TextView) view.findViewById(R.id.user_fullname);
+        userFullName = (TextView) view.findViewById(R.id.user_fullname);
         TextView userEmail = (TextView) view.findViewById(R.id.user_email);
         LinearLayout logOutButton = (LinearLayout) view.findViewById(R.id.logout);
         LinearLayout editName = (LinearLayout) view.findViewById(R.id.edit_name);
         LinearLayout feedback = (LinearLayout) view.findViewById(R.id.feedback_activity);
+
+
+//        Picasso.with(mContext).load(imageURL)
+//                .placeholder(R.drawable.placeholder)
+//                .error(R.drawable.error)
+//                .into(viewHolder.imageView);
 
 
         logOutButton.setOnClickListener(new View.OnClickListener() {
@@ -101,11 +112,16 @@ public class ProfileFragment extends Fragment {
 
     public void moveToEditActivity() {
         Intent intent = new Intent(this.getActivity(), EditUserNameActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, 101);
     }
 
     public void moveToFeedbackActivity() {
         Intent intent = new Intent(this.getActivity(), FeedbackActivity.class);
+        startActivity(intent);
+    }
+
+    public void moveToVisitedEventsActivity() {
+        Intent intent = new Intent(this.getActivity(), VisitedEventsActivity.class);
         startActivity(intent);
     }
 
@@ -121,5 +137,11 @@ public class ProfileFragment extends Fragment {
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 101 && resultCode == getActivity().RESULT_OK){
+            Log.e("onActivityResult", "OK");
+//            mAuth = FirebaseAuth.getInstance();
+            userFullName.setText(data.getStringExtra("name"));
+        }
     }
 }
