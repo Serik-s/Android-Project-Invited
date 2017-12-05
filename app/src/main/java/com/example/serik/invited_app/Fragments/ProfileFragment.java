@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.ImageViewCompat;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -11,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -47,6 +49,7 @@ public class ProfileFragment extends Fragment {
 
     View view;
     TextView userFullName;
+    ImageView userImage;
 //        AppDatabase database;
 
     // newInstance constructor for creating fragment with arguments
@@ -63,7 +66,7 @@ public class ProfileFragment extends Fragment {
 
         mAuth = FirebaseAuth.getInstance();
         view = inflater.inflate(R.layout.profile_activity, container, false);
-
+        userImage = (ImageView) view.findViewById(R.id.user_image);
         userFullName = (TextView) view.findViewById(R.id.user_fullname);
         TextView userEmail = (TextView) view.findViewById(R.id.user_email);
         LinearLayout logOutButton = (LinearLayout) view.findViewById(R.id.logout);
@@ -71,10 +74,11 @@ public class ProfileFragment extends Fragment {
         LinearLayout feedback = (LinearLayout) view.findViewById(R.id.feedback_activity);
 
 
-//        Picasso.with(mContext).load(imageURL)
-//                .placeholder(R.drawable.placeholder)
-//                .error(R.drawable.error)
-//                .into(viewHolder.imageView);
+        Picasso.with(getContext())
+                .load(mAuth.getCurrentUser().getPhotoUrl())
+                .placeholder(R.drawable.user_black)
+                .error(R.drawable.user_black)
+                .into(userImage);
 
 
         logOutButton.setOnClickListener(new View.OnClickListener() {
@@ -107,6 +111,7 @@ public class ProfileFragment extends Fragment {
     public void outFragment() {
         mAuth.signOut();
         LoginManager.getInstance().logOut();
+        EventsFragment.eventList = new ArrayList<>();
         updateUI(null);
     }
 
