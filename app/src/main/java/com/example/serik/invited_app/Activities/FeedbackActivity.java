@@ -21,6 +21,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 
 /**
@@ -61,6 +63,7 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
         buttonFive.setOnClickListener(this);
 
         dateString = DateFormat.getDateInstance(DateFormat.SHORT).format(Calendar.getInstance().getTime());
+
     }
 
     @Override
@@ -161,13 +164,7 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
         if (!validateForm()) {
             return;
         }
-        FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference feedbackRef = database.getReference("Feedback");
-
-        String feedbackText = mFeedbackTextField.getText().toString();
-        String username = mAuth.getCurrentUser().getDisplayName();
-        String email = mAuth.getCurrentUser().getEmail();
-        feedbackRef.updateChildren(Feedback.toMap(username, email, feedbackText, dateString, rating));
+        insertNewFeedback();
 
         AlertDialog.Builder builder;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
@@ -184,6 +181,22 @@ public class FeedbackActivity extends AppCompatActivity implements View.OnClickL
                     }
                 })
                 .show();
+    }
+
+    private void insertNewFeedback() {
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        String key = mDatabase.child("Feedback").push().getKey();
+        String feedbackText = mFeedbackTextField.getText().toString();
+        String username = mAuth.getCurrentUser().getDisplayName();
+        String email = mAuth.getCurrentUser().getEmail();
+        Feedback feedback = new Feedback(username, email, feedbackText, dateString, rating);
+        Map<String, Object> feedbackValues = Feedback.toMap(feedback);
+
+        Map<String, Object> childUpdates = new HashMap<>();
+        childUpdates.put("/Feedback/" + mAuth.getCurrentUser().getUid() + "/" + key, feedbackValues);
+
+        mDatabase.updateChildren(childUpdates);
     }
 
     private boolean validateForm() {

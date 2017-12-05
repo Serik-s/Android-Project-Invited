@@ -7,9 +7,11 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.serik.invited_app.Activities.EventDetails;
+import com.example.serik.invited_app.Activities.MainActivity;
 import com.example.serik.invited_app.Models.Event;
 import com.example.serik.invited_app.R;
 
@@ -25,7 +27,6 @@ public class EventsAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder
     Context mContext;
     List<Event> eventList;
     private static String adapterTAG = "ADAPTER EVENT";
-
 
     public EventsAdapter(Context context, List<Event> eventList) {
         mContext = context;
@@ -43,8 +44,12 @@ public class EventsAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
         view = LayoutInflater.from(parent.getContext()).inflate(R.layout.event_item, parent, false);
 
+
+
         return new MyViewHolder(view);
     }
+
+
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
@@ -69,6 +74,7 @@ public class EventsAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder
         TextView eventTitle;
         TextView eventDate;
         TextView eventPopulation;
+        Button likeButton;
         int position;
 
         public MyViewHolder(View itemView) {
@@ -76,10 +82,23 @@ public class EventsAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder
             eventTitle = (TextView) itemView.findViewById(R.id.event_title);
             eventDate = (TextView) itemView.findViewById(R.id.event_date);
             eventPopulation = (TextView) itemView.findViewById(R.id.event_population);
+            likeButton = (Button) itemView.findViewById(R.id.i_will_go_button);
+
+            likeButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    likeEvent();
+                }
+            });
 
             itemView.setOnClickListener(this);
         }
 
+        public void likeEvent() {
+            MainActivity.user.visitingEvents.add(eventList.get(position));
+            Log.e(adapterTAG, "added new event to user");
+            Log.e(adapterTAG, MainActivity.user.visitingEvents.toString());
+        }
 
         public void setPosition(int position){
             this.position = position;

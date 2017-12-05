@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.example.serik.invited_app.Adapters.MainAdapter;
+import com.example.serik.invited_app.Models.User;
 import com.example.serik.invited_app.R;
 import com.facebook.login.LoginManager;
 import com.google.firebase.auth.FirebaseAuth;
@@ -33,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.bottomBar)
     BottomBar mBottomBar;
 
+    public static User user;
+
     private static String mainActivityTAG = "MAIN ACTIVITY";
 
     @Override
@@ -42,6 +45,7 @@ public class MainActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         mAuth = FirebaseAuth.getInstance();
+        user = new User(mAuth.getCurrentUser().getUid(), mAuth.getCurrentUser().getDisplayName());
 
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
         MainAdapter adapterViewPager = new MainAdapter(getSupportFragmentManager());

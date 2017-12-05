@@ -81,9 +81,11 @@ public class EventsFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = database.getReference("Events");
+        DatabaseReference eventsRef = database.getReference("Events");
+        DatabaseReference userRef = database.getReference("Users");
+//        DatabaseReference currentRef = userRef.child(mAuth.getCurrentUser().getUid());
+        readData(eventsRef);
 
-        readData(myRef);
 
         page = getArguments().getInt("someInt", 0);
         title = getArguments().getString("someTitle");
@@ -149,14 +151,27 @@ public class EventsFragment extends Fragment {
                 recyclerView.setAdapter(eventsAdapter);
                 progressBar.setVisibility(View.GONE);
                 recyclerView.setVisibility(View.VISIBLE);
-
-
             }
 
             @Override
             public void onCancelled(DatabaseError error) {
                 // Failed to read value
                 Log.w(TAG, "Failed to read value.", error.toException());
+            }
+        });
+    }
+
+    private void readUserData(DatabaseReference userRef) {
+        userRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                Object value = dataSnapshot.getValue(Object.class);
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
             }
         });
     }
