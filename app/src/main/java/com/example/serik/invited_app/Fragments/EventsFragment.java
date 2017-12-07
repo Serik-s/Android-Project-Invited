@@ -80,10 +80,10 @@ public class EventsFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mAuth = FirebaseAuth.getInstance();
+
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference eventsRef = database.getReference("Events");
-        DatabaseReference userRef = database.getReference("Users");
-//        DatabaseReference currentRef = userRef.child(mAuth.getCurrentUser().getUid());
         readData(eventsRef);
 
 
@@ -100,24 +100,6 @@ public class EventsFragment extends Fragment {
         progressBar = (FrameLayout) view.findViewById(R.id.progress);
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler);
         Log.e(fragmentTAG, "this is list of events " + eventList);
-
-        Button iGo = (Button) view.findViewById(R.id.i_will_go_button);
-
-
-//        iGo.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                iWillGoToEvent();
-//            }
-//        });
-
-
-//        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.recycler);
-//        eventsAdapter = new EventsAdapter(getActivity(), eventList);
-//        LinearLayoutManager llm = new LinearLayoutManager(this.getContext());
-//        llm.setOrientation(LinearLayoutManager.VERTICAL);
-//        recyclerView.setLayoutManager(llm);
-//        recyclerView.setAdapter(eventsAdapter);
 
         return view;
     }
@@ -144,7 +126,7 @@ public class EventsFragment extends Fragment {
                 }
                 Log.e(fragmentTAG, "this is updated list of events " + eventList);
 
-                eventsAdapter = new EventsAdapter(getActivity(), eventList);
+                eventsAdapter = new EventsAdapter(getActivity(), eventList, mAuth);
                 LinearLayoutManager llm = new LinearLayoutManager(getActivity());
                 llm.setOrientation(LinearLayoutManager.VERTICAL);
                 recyclerView.setLayoutManager(llm);

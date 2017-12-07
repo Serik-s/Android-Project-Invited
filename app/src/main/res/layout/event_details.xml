@@ -80,10 +80,16 @@
                         android:id="@+id/articleText"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="@dimen/spacing_large"
+                        android:layout_marginLeft="16dp"
+                        android:layout_gravity="center"
+                        android:textColor="@color/colorBlack"
+                        android:layout_marginRight="16dp"
+                        android:layout_marginTop="16dp"
                         android:text="@string/lorem_ipsum"
                         android:textAppearance="@style/TextAppearance.AppCompat.Body1"/>
                     <TextView
+                        android:layout_marginLeft="16dp"
+                        android:layout_marginRight="16dp"
                         android:id="@+id/articleDate"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

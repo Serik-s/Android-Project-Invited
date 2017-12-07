@@ -12,4 +12,5 @@
     <color name="tabColor">#005696</color>
     <color name="colorBlack">#000000</color>
     <color name="eventsBackgroundColor">#F7F7F7</color>
+    <color name="colorRed">#fff00000</color>
 </resources>

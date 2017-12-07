@@ -10,9 +10,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.UserProfileChangeRequest;
+import com.google.firebase.database.Exclude;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import static android.content.ContentValues.TAG;
 
@@ -77,6 +80,17 @@ public class User implements Parcelable {
         parcel.writeString(userID);
         parcel.writeString(userName);
         parcel.writeTypedList(visitingEvents);
+    }
+
+    @Exclude
+    public static Map<String, Object> toMap(Event event) {
+        HashMap<String, Object> result = new HashMap<>();
+
+        result.put("eventTitle", event.getEventTitle());
+        result.put("eventDescription", event.getEventDescription());
+        result.put("eventDate", event.getDate());
+
+        return result;
     }
 
 

@@ -3,12 +3,15 @@ package com.example.serik.invited_app.Models;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.firebase.database.Exclude;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
 
 import java.util.Dictionary;
 import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by Serik on 13.11.2017.
@@ -44,6 +47,19 @@ public class Event implements Parcelable {
         eventDescription = in.readString();
         eventPopulation = in.readLong();
         imageURL = in.readString();
+    }
+
+    @Exclude
+    public static Map<String, Object> toMap(Event event) {
+        HashMap<String, Object> result = new HashMap<>();
+
+        result.put("eventTitle", event.eventTitle);
+        result.put("eventPopulation", event.eventPopulation);
+        result.put("eventImage", event.imageURL);
+        result.put("eventDescription", event.eventDescription);
+        result.put("eventDate", event.eventDate);
+
+        return result;
     }
 
 
@@ -84,6 +100,8 @@ public class Event implements Parcelable {
 
     public void setEventPopulation(long eventPopulation) { this.eventPopulation = eventPopulation; }
 
+    public void setEventID(int eventID) { this.eventID = eventID; }
+
     @Override
     public int describeContents() {
         return 0;
@@ -101,6 +119,6 @@ public class Event implements Parcelable {
 
     @Override
     public String toString() {
-        return "This is your EVENT" + eventTitle + " " + eventDescription + " " + eventDate + " " + eventPopulation;
+        return "This is your EVENT: " + eventTitle + " " + eventDescription + " " + eventDate + " " + eventPopulation;
     }
 }

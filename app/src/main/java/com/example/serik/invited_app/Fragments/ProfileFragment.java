@@ -72,6 +72,8 @@ public class ProfileFragment extends Fragment {
         LinearLayout logOutButton = (LinearLayout) view.findViewById(R.id.logout);
         LinearLayout editName = (LinearLayout) view.findViewById(R.id.edit_name);
         LinearLayout feedback = (LinearLayout) view.findViewById(R.id.feedback_activity);
+        LinearLayout visitedEvents = (LinearLayout) view.findViewById(R.id.visited_events_activity);
+
 
 
         Picasso.with(getContext())
@@ -99,6 +101,12 @@ public class ProfileFragment extends Fragment {
                 moveToFeedbackActivity();
             }
         });
+        visitedEvents.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                moveToVisitedEventsActivity();
+            }
+        });
 
         if (mAuth != null && mAuth.getCurrentUser() != null) {
             userEmail.setText(mAuth.getCurrentUser().getEmail());
@@ -124,6 +132,7 @@ public class ProfileFragment extends Fragment {
         Intent intent = new Intent(this.getActivity(), FeedbackActivity.class);
         startActivity(intent);
     }
+
 
     public void moveToVisitedEventsActivity() {
         Intent intent = new Intent(this.getActivity(), VisitedEventsActivity.class);

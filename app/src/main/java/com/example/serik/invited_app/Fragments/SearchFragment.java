@@ -17,6 +17,7 @@ import android.widget.LinearLayout;
 import com.example.serik.invited_app.Adapters.EventsAdapter;
 import com.example.serik.invited_app.Models.Event;
 import com.example.serik.invited_app.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -38,6 +39,8 @@ public class SearchFragment extends Fragment {
     EventsAdapter eventsAdapter;
     View view;
     EditText searchingEventName;
+    private FirebaseAuth mAuth;
+
 
 
     List<Event> eventList = new ArrayList<>();
@@ -57,6 +60,7 @@ public class SearchFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        mAuth = FirebaseAuth.getInstance();
         FirebaseDatabase database = FirebaseDatabase.getInstance();
         DatabaseReference myRef = database.getReference("Events");
 
@@ -108,7 +112,7 @@ public class SearchFragment extends Fragment {
                 }
                 Log.e(fragmentTAG, "this is updated list of events " + eventList);
 
-                eventsAdapter = new EventsAdapter(getActivity(), foundedEvents);
+                eventsAdapter = new EventsAdapter(getActivity(), foundedEvents, mAuth);
                 LinearLayoutManager llm = new LinearLayoutManager(getActivity());
                 llm.setOrientation(LinearLayoutManager.VERTICAL);
                 recyclerView.setLayoutManager(llm);
@@ -128,15 +132,16 @@ public class SearchFragment extends Fragment {
     }
 
     public void searchEvent() {
-        String searchingName = searchingEventName.getText().toString();
+        String searchingName = searchingEventName.getText().toString().toLowerCase();
+        Log.e(fragmentTAG, "searching name is: " + searchingName);
         foundedEvents = new ArrayList<>();
         for(int i = 0; i < EventsFragment.eventList.size(); i++) {
-            if (eventList.get(i).getEventTitle().contains(searchingName)) {
+            if (eventList.get(i).getEventTitle().toLowerCase().contains(searchingName)) {
                 foundedEvents.add(eventList.get(i));
             }
         }
 
-        eventsAdapter = new EventsAdapter(getActivity(), foundedEvents);
+        eventsAdapter = new EventsAdapter(getActivity(), foundedEvents, mAuth);
         LinearLayoutManager llm = new LinearLayoutManager(getActivity());
         llm.setOrientation(LinearLayoutManager.VERTICAL);
         recyclerView.setLayoutManager(llm);

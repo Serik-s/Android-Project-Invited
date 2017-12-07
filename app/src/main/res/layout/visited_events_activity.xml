@@ -4,10 +4,33 @@
     android:layout_height="match_parent">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/visited_recycler"
+        android:id="@+id/user_visited_events"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:visibility="visible"
         />
+
+
+    <!--<FrameLayout-->
+        <!--android:id="@+id/user_progress"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
+
+        <!--<ProgressBar-->
+            <!--android:layout_width="40dp"-->
+            <!--android:layout_height="40dp"-->
+            <!--android:layout_gravity="center"/>-->
+    <!--</FrameLayout>-->
+
+    <TextView
+        android:id="@+id/empty_event_list_text_view"
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:text="Unfortunately, you haven't visited any events yet :("
+        android:textColor="@color/colorBlack"
+        android:rotation="-45"
+        android:visibility="gone"></TextView>
+
 </LinearLayout>
