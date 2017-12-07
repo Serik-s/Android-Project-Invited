@@ -29,6 +29,7 @@ import com.google.firebase.database.Transaction;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -67,14 +68,19 @@ public class EventsAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
-        Log.e("ViewHolder", "Bind");
-        Log.e("position", String.valueOf(position));
-        MyViewHolder viewHolder = (MyViewHolder) holder;
-        Event event = eventList.get(position);
-        viewHolder.setPosition(position);
-        viewHolder.eventTitle.setText(event.getEventTitle());
-        viewHolder.eventDate.setText(event.getDate());
-        viewHolder.eventPopulation.setText("Number of people coming: " + event.getEventPopulation());
+
+        if (eventList.get(position) != null) {
+            Log.e("ViewHolder", "Bind");
+            Log.e("position", String.valueOf(position));
+            MyViewHolder viewHolder = (MyViewHolder) holder;
+            Event event = eventList.get(position);
+            event.setEventID(position);
+            viewHolder.setPosition(position);
+            viewHolder.eventTitle.setText(event.getEventTitle());
+            viewHolder.eventDate.setText(event.getDate());
+            viewHolder.eventPopulation.setText("Number of people coming: " + event.getEventPopulation());
+        }
+
     }
 
     @Override
@@ -92,6 +98,7 @@ public class EventsAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder
         String key;
         int position;
         DatabaseReference mDatabase;
+
         int likeCase = 1;
         public MyViewHolder(View itemView) {
             super(itemView);
@@ -127,6 +134,7 @@ public class EventsAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder
             mDatabase = FirebaseDatabase.getInstance().getReference();
 
             key = mDatabase.child("Users").push().getKey();
+            ArrayList<Event> currentList = MainActivity.user.visitingEvents;
 
             Map<String, Object> eventValues = Event.toMap(eventList.get(position));
             Map<String, Object> childUpdates = new HashMap<>();
@@ -134,6 +142,7 @@ public class EventsAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
             mDatabase.updateChildren(childUpdates);
             Log.e(adapterTAG, "size of user's event list is: " + MainActivity.user.visitingEvents.size());
+
             MainActivity.user.visitingEvents.add(eventList.get(position));
 
             Log.e(adapterTAG, "added new event to user");

@@ -33,7 +33,8 @@
             android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
-        <activity android:name=".Activities.EventDetails">
+        <activity android:name=".Activities.EventDetails"
+            android:theme="@style/AppTheme.NoActionBar">
         </activity>
 
         <activity android:name=".Activities.EditUserNameActivity">
