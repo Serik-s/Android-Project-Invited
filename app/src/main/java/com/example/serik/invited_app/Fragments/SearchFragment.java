@@ -105,8 +105,9 @@ public class SearchFragment extends Fragment {
                     String eventDate = (String) messageSnapshot.child("eventDate").getValue();
                     String eventDescription = (String) messageSnapshot.child("eventDescription").getValue();
                     long eventPopulation = (long) messageSnapshot.child("eventPopulation").getValue();
+                    String eventImage = (String) messageSnapshot.child("eventImage").getValue();
 
-                    Event event = new Event(eventTitle, eventDate, eventDescription, eventPopulation);
+                    Event event = new Event(eventTitle, eventDate, eventDescription, eventPopulation, eventImage);
                     Log.e(fragmentTAG, event.toString());
                     eventList.add(event);
                 }

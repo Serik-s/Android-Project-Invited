@@ -32,34 +32,6 @@
         android:layout_marginTop="15dp">
 
 
-        <LinearLayout
-            android:id="@+id/userNameLayout"
-            android:layout_width="180dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="12dp"
-
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="parent">
-
-            <ImageView
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:background="@drawable/left_side_image"
-                android:padding="2dp"
-                android:src="@drawable/user_logo" />
-
-            <EditText
-                android:id="@+id/user_name_registration"
-                android:layout_width="match_parent"
-                android:layout_height="35dp"
-                android:background="@drawable/right_side_edit_text"
-                android:fontFamily="sans-serif-condensed"
-                android:hint="Enter username..."
-                android:paddingLeft="10dp"
-                android:textSize="13sp" />
-        </LinearLayout>
 
         <LinearLayout
             android:id="@+id/mailLayout"
@@ -68,9 +40,9 @@
             android:layout_marginTop="12dp"
 
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintLeft_toLeftOf="@+id/userNameLayout"
-            app:layout_constraintRight_toRightOf="@+id/userNameLayout"
-            app:layout_constraintTop_toBottomOf="@+id/userNameLayout">
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="parent">
 
             <ImageView
                 android:id="@+id/MailIcon"
@@ -117,6 +89,7 @@
                 android:fontFamily="sans-serif-condensed"
                 android:textSize="13sp"
                 android:paddingLeft="10dp"
+                android:inputType="textPassword"
                 android:hint="Enter password..." />
         </LinearLayout>
 

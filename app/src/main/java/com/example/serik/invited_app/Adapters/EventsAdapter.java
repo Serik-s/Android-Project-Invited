@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -74,6 +75,9 @@ public class EventsAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder
             Log.e("position", String.valueOf(position));
             MyViewHolder viewHolder = (MyViewHolder) holder;
             Event event = eventList.get(position);
+            int id = mContext.getResources().getIdentifier("com.example.serik.invited_app:drawable/" + event.getImageURL(), null, null);
+
+            viewHolder.eventImage.setImageResource(id);
             event.setEventID(position);
             viewHolder.setPosition(position);
             viewHolder.eventTitle.setText(event.getEventTitle());
@@ -95,6 +99,7 @@ public class EventsAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder
         TextView eventDate;
         TextView eventPopulation;
         Button likeButton;
+        ImageView eventImage;
         String key;
         int position;
         DatabaseReference mDatabase;
@@ -106,6 +111,7 @@ public class EventsAdapter  extends RecyclerView.Adapter<RecyclerView.ViewHolder
             eventDate = (TextView) itemView.findViewById(R.id.event_date);
             eventPopulation = (TextView) itemView.findViewById(R.id.event_population);
             likeButton = (Button) itemView.findViewById(R.id.i_will_go_button);
+            eventImage = (ImageView) itemView.findViewById(R.id.card_image);
 
             if (MainActivity.user.visitingEvents.contains(eventList.get(position))) {
                 likeCase = 0;

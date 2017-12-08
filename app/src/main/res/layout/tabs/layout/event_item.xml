@@ -31,7 +31,7 @@
             <ImageView
                 android:layout_width="match_parent"
                 android:layout_height="170dp"
-                android:id="@+id/cardImage"
+                android:id="@+id/card_image"
                 android:src="@drawable/android_background"
                 android:scaleType="centerCrop"/>
 

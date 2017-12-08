@@ -141,6 +141,7 @@
                 android:fontFamily="sans-serif-condensed"
                 android:textSize="13sp"
                 android:paddingLeft="10dp"
+                android:inputType="textPassword"
                 android:hint="Enter password..." />
         </LinearLayout>
 

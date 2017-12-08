@@ -43,7 +43,6 @@ public class EditUserNameActivity extends AppCompatActivity {
         String nameToChange = mUserNameTextField.getText().toString();
 
         User.changeUserName(mAuth.getCurrentUser(), nameToChange);
-        Log.e("CHANGED NAME IS ", mAuth.getCurrentUser().getDisplayName());
 
         Intent intent = new Intent();
         intent.putExtra("name", nameToChange);

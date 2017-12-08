@@ -33,11 +33,12 @@ public class Event implements Parcelable {
         eventDate = "30th of Novermber";
     }
 
-    public Event(String eventTitle, String eventDate, String eventDescription, long  eventPopulation){
+    public Event(String eventTitle, String eventDate, String eventDescription, long  eventPopulation, String imageURL){
         this.eventTitle = eventTitle;
         this.eventDescription = eventDescription;
         this.eventDate = eventDate;
         this.eventPopulation = eventPopulation;
+        this.imageURL = imageURL;
     }
 
     protected Event(Parcel in) {
@@ -90,6 +91,8 @@ public class Event implements Parcelable {
     public int getEventID() { return  eventID; }
 
     public long getEventPopulation() { return eventPopulation; }
+
+    public String getImageURL() { return imageURL; }
 
     // SET METHODS FOR EVENT
     public void setEventDate(String eventDate) { this.eventDate =  eventDate; }

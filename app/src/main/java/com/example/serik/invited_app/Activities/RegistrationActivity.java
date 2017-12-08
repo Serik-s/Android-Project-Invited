@@ -33,7 +33,6 @@ public class RegistrationActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
     private EditText mEmailField;
     private EditText mPasswordField;
-    private EditText mUserNameField;
     private ProgressBar progressBar;
 
     private static final String facebookTAG = "Facebook Login";
@@ -48,7 +47,6 @@ public class RegistrationActivity extends AppCompatActivity {
         // Edit Texts
         mEmailField = findViewById(R.id.mail_field);
         mPasswordField = findViewById(R.id.password_field);
-        mUserNameField = findViewById(R.id.user_name_registration);
 
         mAuth = FirebaseAuth.getInstance();
     }
@@ -67,11 +65,10 @@ public class RegistrationActivity extends AppCompatActivity {
         Button loginButton = (Button) findViewById(R.id.sign_up_button);
         String email = mEmailField.getText().toString();
         String password = mPasswordField.getText().toString();
-        String username= mUserNameField.getText().toString();
-        Log.d(emailTAG, "these are mail " + email + " password " + password + " and username" + username);
-        createAccount(email, password, username);
+        Log.d(emailTAG, "these are mail " + email + " password " + password);
+        createAccount(email, password);
     }
-    private void createAccount(String email, String password, final String username) {
+    private void createAccount(String email, String password) {
 
         Log.e(emailTAG, "createAccount:" + email);
         if (!validateForm()) {
@@ -132,13 +129,6 @@ public class RegistrationActivity extends AppCompatActivity {
             mPasswordField.setError(null);
         }
 
-        String username = mUserNameField.getText().toString();
-        if (TextUtils.isEmpty(password)) {
-            mUserNameField.setError("Required.");
-            valid = false;
-        } else {
-            mUserNameField.setError(null);
-        }
 
         return valid;
     }
